@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The red "decline" target. Same shape and size as the answer target so the two
+     read as a pair and neither looks like the safer one. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#55FFFFFF">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#F44336" />
+            <stroke android:width="2dp" android:color="#66FFFFFF" />
+        </shape>
+    </item>
+</ripple>

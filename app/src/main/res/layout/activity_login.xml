@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_dark"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="32dp"
+        android:paddingTop="80dp"
+        android:paddingBottom="40dp">
+
+        <!-- Logo Section. This was a placeholder vector (a purple circle with a
+             white handset) that matched nothing else in the product; it is now the
+             supplied brand mark. -->
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/brand_logo"
+            android:contentDescription="@string/app_name" />
+
+        <!-- The "Callix PBX" wordmark that used to sit under the logo has been
+             removed. The mark itself already carries the product name, so the
+             line only pushed the sign-in form down. The subtitle now holds the
+             spacing the wordmark used to occupy. -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in to your account"
+            android:textSize="14sp"
+            android:textColor="#B3FFFFFF"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="48dp" />
+
+        <!-- Card Container -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#1AFFFFFF"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#33FFFFFF"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Server Settings Toggle -->
+                <TextView
+                    android:id="@+id/tvShowApiUrl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="▼ Server Settings"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="12sp"
+                    android:paddingBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <!-- API URL -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilApiUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="API URL (https://app.callix.com.bd)"
+                    android:visibility="gone"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/white_60"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etApiUrl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_60"
+                        android:inputType="textUri"
+                        android:imeOptions="actionNext" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Username -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Extension / Username"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/white_60"
+                    app:startIconDrawable="@drawable/ic_person"
+                    app:startIconTint="@color/primary_color"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_60"
+                        android:inputType="text"
+                        android:imeOptions="actionNext" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Password -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:boxStrokeColor="@color/primary_color"
+                    app:hintTextColor="@color/white_60"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/primary_color"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/white_60"
+                    app:boxStrokeWidth="1dp"
+                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white_60"
+                        android:inputType="textPassword"
+                        android:imeOptions="actionDone" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Remember Me -->
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkRememberMe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remember Me"
+                    android:textColor="@color/white_80"
+                    app:buttonTint="@color/primary_color"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Login Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Sign In"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:fontFamily="sans-serif-medium"
+                    app:backgroundTint="@color/primary_color"
+                    app:cornerRadius="16dp"
+                    app:rippleColor="#40FFFFFF" />
+
+                <!-- Progress Bar -->
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginTop="-48dp"
+                    android:indeterminateTint="@color/white" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Version. Filled from BuildConfig.VERSION_NAME at runtime: the literal
+             that used to sit here said "v1.0.4" long after the build had moved on,
+             so the screen advertised a version that was never installed. -->
+        <TextView
+            android:id="@+id/tvVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#4DFFFFFF"
+            android:textSize="12sp"
+            android:layout_marginTop="32dp" />
+
+    </LinearLayout>
+</ScrollView>

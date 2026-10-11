@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/CallixCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="14dp"
+        android:gravity="center_vertical">
+
+        <!-- Direction Icon -->
+        <ImageView
+            android:id="@+id/ivCallDirection"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/ic_call_incoming" />
+
+        <!-- Info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvContactName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Name"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvCallStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Incoming"
+                    android:textSize="12sp"
+                    android:textColor="@color/accent_green" />
+
+                <TextView
+                    android:id="@+id/tvNumberSeparator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" · "
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="101"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Right Side: Time and Duration -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/tvCallTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:30 AM"
+                android:textSize="11sp"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2m 5s"
+                android:textSize="11sp"
+                android:textColor="@color/primary_color"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp" />
+
+            <!-- Playback of THIS user's own recording. The server marks which rows
+                 carry a recording the caller is allowed to hear (hasRecording),
+                 so the control is shown only when playing it can actually work,
+                 and never as an always-visible button that quietly does nothing. -->
+            <ImageView
+                android:id="@+id/ivPlayRecording"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="4dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_play"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/calls_play_recording"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

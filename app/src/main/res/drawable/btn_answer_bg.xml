@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The green "answer" target. A ripple makes the press land, because the gesture
+     is a drag and a drag that produces no immediate feedback feels broken. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#55FFFFFF">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#4CAF50" />
+            <stroke android:width="2dp" android:color="#66FFFFFF" />
+        </shape>
+    </item>
+</ripple>

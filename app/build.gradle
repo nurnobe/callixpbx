@@ -1,0 +1,207 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    // Firebase is optional - uncomment when you have a real google-services.json
+    // id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.callix.pbx'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.callix.pbx"
+        // 23, not 24, and this is a compatibility fix rather than a preference.
+        //
+        // The Linphone SDK's own manifest declares <uses-sdk android:minSdkVersion="23">,
+        // so 23 is the lowest this app can honestly claim -- the merge fails below it.
+        // Demanding 24 excluded Android 6.0 handsets outright, and "some older phones
+        // will not install it" is exactly what those users were seeing.
+        //
+        // 23 also forces v1 (JAR) signing back on, which Android 6 needs and cannot
+        // be given by the v2 scheme (see the signingConfigs block below).
+        minSdk 23
+        targetSdk 34
+        // Bumped so this builds ON TOP of an existing install instead of being
+        // refused as the same version.
+        // 14 / 1.3 -- the display-name fix (the dialer, call log and call screen
+        // must show the EXTENSION's own name, not the tenant account's) plus the
+        // battery-exemption flow that 1.2 shipped without.
+        versionCode 100
+        versionName "1.00"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            // Only the two CPU types real handsets use.
+            //
+            // The Linphone AAR also ships x86 and x86_64 libraries, and the universal
+            // APK picked all four up: 145 MB, which installs badly on the older phones
+            // this change exists FOR. Intel-based Android handsets are effectively
+            // extinct, so x86 is not worth 4 MB of every download, let alone 55.
+            //
+            // Both the per-ABI splits and the universal APK honour this.
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
+    }
+
+    signingConfigs {
+        // The debug key, deliberately: every APK shipped to these users so far was
+        // signed with it, and an APK signed with a DIFFERENT key cannot be installed
+        // over one already on the phone -- the user would have to uninstall first and
+        // lose their session. Keeping the same key is what makes an upgrade an upgrade.
+        //
+        // V1 (JAR) signing is switched on EXPLICITLY. Android 6.0 does not implement
+        // the v2 APK Signature Scheme at all, so a v2-only APK is rejected by the
+        // installer before minSdk is even consulted. AGP turns v1 off automatically
+        // once minSdk >= 24, which is precisely the shape of the APK that could not be
+        // installed on the older handsets. Setting it here cannot be undone by a future
+        // minSdk bump.
+        debug {
+            enableV1Signing true
+            enableV2Signing true
+            enableV3Signing true
+        }
+    }
+
+    buildTypes {
+        release {
+            // Every APK shipped so far has been a DEBUG build: no shrinking at all,
+            // 16 dex files, and every unused library the SDK dragged in. R8 removes
+            // the unreachable code and shrinkResources drops resources nothing points
+            // at.
+            //
+            // The release output is signed with the SAME debug key on purpose: a
+            // different key cannot be installed over an existing copy, so shrinking
+            // the app must not cost every user a reinstall. Before a Play Store
+            // release, generate a real keystore -- and accept that one reinstall.
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Build a small APK for each real Android CPU type instead of bundling every
+    // native Linphone library into one very large universal APK.
+    //
+    // universalApk is now TRUE, and that is a support decision. With it off the user
+    // had to choose between app-arm64-v8a and app-armeabi-v7a, and choosing wrong is
+    // not a soft failure -- the installer refuses the file with
+    // INSTALL_FAILED_NO_MATCHING_ABIS, which reads to the user as "this app will not
+    // install on my phone". A 32-bit handset cannot run the 64-bit APK and vice
+    // versa, and nothing on the download page said so. The universal APK carries both
+    // and installs on either, so there is one file that is always the right file.
+    // The per-ABI APKs are still produced for anyone who wants the smaller download.
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'arm64-v8a', 'armeabi-v7a'
+            universalApk true
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+        buildConfig true   // BuildConfig.VERSION_NAME এর জন্য
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    // Modern packaging DSL (AGP 8). `resources.excludes` is the block that reaches
+    // assets merged out of an AAR; the older `packagingOptions.exclude` did not.
+    packaging {
+        resources {
+            // The Linphone SDK ships a ringtone album under
+            // assets/org.linphone.core/share/sounds/linphone/rings (7 files, ~4.4 MB).
+            // This app rings with the PHONE's own system ringtone and tells the core
+            // not to ring at all (Core.setNativeRingingEnabled(true)), so none of
+            // those files is ever played.
+            //
+            // DO NOT add an `excludes` entry for them here expecting it to work.
+            // It was tried twice and VERIFIED NOT TO TAKE EFFECT on this AGP 8.2.0:
+            // with 'org.linphone.core/share/sounds/linphone/rings/**' and again with
+            // the real packaged path prefixed by 'assets/', via
+            // `clean assembleDebug assembleRelease`, and finally via
+            // `clean assembleDebug --no-build-cache` (40/40 tasks executed, nothing
+            // restored from cache). All 7 files were still in every APK, because this
+            // DSL is not part of the asset-merge task's input snapshot, so the merge
+            // is skipped as UP-TO-DATE and never applies the filter.
+            //
+            // Removing the album needs a different mechanism -- a task that deletes
+            // from build/intermediates/assets between merge and package, or
+            // androidResources.ignoreAssetsPattern -- and it is NOT done. ~4.4 MB is
+            // therefore still shipped in every APK. Left as a known, measured
+            // outstanding item rather than a silent no-op.
+            //
+            // Three libraries ship these; any one copy will do.
+            pickFirsts += [
+                '**/libc++_shared.so',
+                '**/libssl.so',
+                '**/libcrypto.so'
+            ]
+        }
+    }
+}
+
+dependencies {
+    // AndroidX Core
+    //
+    // Everything below is referenced by app code or by an inflated layout. The
+    // libraries that were NOT -- Navigation, CardView, WorkManager, Room, Glide,
+    // Lottie, Shimmer, CircleImageView and play-services-maps -- have been removed:
+    // each was pulling its own transitive graph into every dex for nothing.
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
+    // Declared explicitly rather than inherited from Navigation, which used to
+    // supply these transitively: `by viewModels()` (LoginActivity) and
+    // `registerForActivityResult()` (both Activities and Fragments) live here.
+    implementation 'androidx.activity:activity-ktx:1.8.2'
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    // Used by two layouts (SwipeRefreshLayout) -- do not remove.
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Material Design (also supplies CardView transitively via MaterialCardView)
+    implementation 'com.google.android.material:material:1.11.0'
+
+    // Linphone SIP SDK
+    implementation 'org.linphone:linphone-sdk-android:5.3.0'
+
+    // Retrofit for REST API
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+
+    // Google Play Services Location (Live Location) -- play-services-maps was
+    // never used and is gone; only the location provider is needed.
+    implementation 'com.google.android.gms:play-services-location:21.1.0'
+
+    // SharedPreferences Encrypted
+    implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+
+    // Timber Logging
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // Test
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

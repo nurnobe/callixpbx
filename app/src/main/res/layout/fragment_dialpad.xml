@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_dark"
+    android:paddingBottom="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="20dp">
+
+        <!-- Who is signed in. A shared handset is normal here, and placing a
+             call from the wrong extension fails, so the dialer names the
+             identity instead of leaving the user to guess. -->
+        <TextView
+            android:id="@+id/tvExtensionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/primary_color"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Make a call"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Enter an extension or phone number"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <!-- Flexible slack, placed ABOVE the pad rather than below it, so the keypad
+         and the number it is typing sit low on the screen where the thumb is.
+         It is the only weighted child, so on a short screen it collapses to
+         nothing before any key can be squeezed. -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Dialpad Number Display -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="14dp"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDialedNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textSize="32sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:letterSpacing="0.05"
+            android:hint="Number"
+            android:textColorHint="#4DFFFFFF"
+            android:inputType="phone"
+            android:cursorVisible="true" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:icon="@drawable/ic_backspace"
+            app:iconTint="@color/white_60"
+            app:iconSize="24dp"
+            app:iconPadding="0dp"
+            android:text="" />
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#1AFFFFFF"
+        android:layout_marginHorizontal="24dp" />
+
+    <!-- Dialpad Grid -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="18dp">
+
+        <!-- Row 1: 1 2 3 -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn1" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="1" android:tag="1 "/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn2" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="2" android:tag="ABC"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn3" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="3" android:tag="DEF"/>
+        </LinearLayout>
+
+        <!-- Row 2: 4 5 6 -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn4" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="4" android:tag="GHI"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn5" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="5" android:tag="JKL"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn6" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="6" android:tag="MNO"/>
+        </LinearLayout>
+
+        <!-- Row 3: 7 8 9 -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn7" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="7" android:tag="PQRS"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn8" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="8" android:tag="TUV"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn9" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="9" android:tag="WXYZ"/>
+        </LinearLayout>
+
+        <!-- Row 4: * 0 # -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnStar" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="*" android:tag=""/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn0" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="0" android:tag="+"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnHash" style="@style/DialpadButton" android:layout_width="0dp" android:layout_weight="1" android:text="#" android:tag=""/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Call Button -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btnCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:text="Start call"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:icon="@drawable/ic_call_answer"
+        app:iconTint="@color/white"
+        app:backgroundTint="#4CAF50"
+        android:paddingHorizontal="48dp" />
+
+</LinearLayout>

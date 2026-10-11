@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Live Location"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            android:paddingBottom="20dp" />
+
+        <!-- Location Icon -->
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_location"
+            app:tint="@color/primary_color"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Status Text -->
+        <TextView
+            android:id="@+id/tvLocationStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔴 Location Sharing Disabled"
+            android:textSize="16sp"
+            android:textColor="@color/accent_red"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Mandatory, not optional. The On/Off switch that used to live in this
+             card was removed at the owner's request: staff turned location sharing
+             off and left it off, and the dashboard stayed empty. What remains is a
+             statement of fact, not a control. -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CallixCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location sharing is always on"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Sent when your phone rings and on every incoming or outgoing call. This cannot be switched off from the app."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <!-- Escalation only: it can improve sharing to "all the time".
+                     No control anywhere turns sharing off. -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAllowBackground"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone"
+                    android:text="Allow location all the time"
+                    android:textColor="@color/primary_color"
+                    app:strokeColor="@color/primary_color"
+                    app:cornerRadius="12dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Current Location -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CallixCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Location"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:paddingBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/tvCurrentLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tap below to check current location"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnShareLocation"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Check Location"
+                    android:textColor="@color/primary_color"
+                    android:layout_marginTop="12dp"
+                    app:strokeColor="@color/primary_color"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/ic_location"
+                    app:iconTint="@color/primary_color" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

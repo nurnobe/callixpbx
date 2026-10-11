@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The incoming-call screen.
+  Two circular targets that are SWIPED UP: green answers, red declines. Both are
+  also tappable, because a swipe must never be the only way to answer a call.
+  A user with limited hand mobility, or one holding the phone awkwardly, still
+  needs a way through. The hint text says which gesture does what so nobody has to
+  guess, and every target is at least 72dp across so it is reachable one-handed.
+
+  The pulse rings behind the avatar are animated from IncomingCallActivity. They
+  are the only moving thing on the screen, which is what draws the eye to the
+  caller rather than to the buttons.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_call_gradient"
+    android:gravity="center_horizontal"
+    android:paddingTop="60dp">
+
+    <!-- Caller Avatar with pulse animation -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+
+        <!-- Pulse ring 1 -->
+        <View
+            android:id="@+id/pulseRing1"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_pulse"
+            android:alpha="0.3" />
+
+        <!-- Pulse ring 2 -->
+        <View
+            android:id="@+id/pulseRing2"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_pulse"
+            android:alpha="0.5" />
+
+        <!-- Avatar -->
+        <FrameLayout
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_avatar_bg">
+
+            <TextView
+                android:id="@+id/tvCallerInitials"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="?"
+                android:textSize="44sp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvIncomingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/call_incoming_label"
+        android:textColor="#80FFFFFF"
+        android:textSize="14sp"
+        android:letterSpacing="0.1" />
+
+    <TextView
+        android:id="@+id/tvCallerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/incoming_unknown_caller"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tvCallerNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#B3FFFFFF"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Swipe-up targets: drag towards the top of the screen to act. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingHorizontal="40dp"
+        android:paddingBottom="44dp">
+
+        <!-- Decline -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <FrameLayout
+                android:id="@+id/btnDecline"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/btn_decline_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/call_slide_to_decline">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_call_decline"
+                    app:tint="@color/white"
+                    android:importantForAccessibility="no" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/call_slide_to_decline"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Answer -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <FrameLayout
+                android:id="@+id/btnAnswer"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/btn_answer_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="@string/call_slide_to_answer">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_call_answer"
+                    app:tint="@color/white"
+                    android:importantForAccessibility="no" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/call_slide_to_answer"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

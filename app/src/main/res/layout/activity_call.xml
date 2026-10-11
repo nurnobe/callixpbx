@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_call_gradient"
+    android:gravity="center_horizontal"
+    android:paddingTop="60dp">
+
+    <!-- Top bar -->
+    <TextView
+        android:id="@+id/tvCallStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calling..."
+        android:textColor="#B3FFFFFF"
+        android:textSize="14sp"
+        android:letterSpacing="0.08" />
+
+    <TextView
+        android:id="@+id/tvCallTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="monospace"
+        android:layout_marginTop="4dp" />
+
+    <!-- Avatar -->
+    <FrameLayout
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/circle_avatar_bg">
+
+        <TextView
+            android:id="@+id/tvCallerInitials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="?"
+            android:textSize="40sp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvCallerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unknown"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/tvCallerNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#B3FFFFFF"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp" />
+
+    <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
+
+    <!-- In-call DTMF Dialpad (hidden by default) -->
+    <LinearLayout
+        android:id="@+id/layoutDialpad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:paddingHorizontal="32dp"
+        android:paddingBottom="8dp">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+            <Button android:id="@+id/dtmf1" android:layout_width="72dp" android:layout_height="56dp" android:text="1" style="@style/DtmfButton" />
+            <Button android:id="@+id/dtmf2" android:layout_width="72dp" android:layout_height="56dp" android:text="2" style="@style/DtmfButton" />
+            <Button android:id="@+id/dtmf3" android:layout_width="72dp" android:layout_height="56dp" android:text="3" style="@style/DtmfButton" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+            <Button android:id="@+id/dtmf4" android:layout_width="72dp" android:layout_height="56dp" android:text="4" style="@style/DtmfButton" />
+            <Button android:id="@+id/dtmf5" android:layout_width="72dp" android:layout_height="56dp" android:text="5" style="@style/DtmfButton" />
+            <Button android:id="@+id/dtmf6" android:layout_width="72dp" android:layout_height="56dp" android:text="6" style="@style/DtmfButton" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+            <Button android:id="@+id/dtmf7" android:layout_width="72dp" android:layout_height="56dp" android:text="7" style="@style/DtmfButton" />
+            <Button android:id="@+id/dtmf8" android:layout_width="72dp" android:layout_height="56dp" android:text="8" style="@style/DtmfButton" />
+            <Button android:id="@+id/dtmf9" android:layout_width="72dp" android:layout_height="56dp" android:text="9" style="@style/DtmfButton" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center">
+            <Button android:id="@+id/dtmfStar" android:layout_width="72dp" android:layout_height="56dp" android:text="*" style="@style/DtmfButton" />
+            <Button android:id="@+id/dtmf0" android:layout_width="72dp" android:layout_height="56dp" android:text="0" style="@style/DtmfButton" />
+            <Button android:id="@+id/dtmfHash" android:layout_width="72dp" android:layout_height="56dp" android:text="#" style="@style/DtmfButton" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Action Buttons Row 1 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingHorizontal="32dp">
+
+        <!-- Mute -->
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center" android:layout_weight="1">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMute"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:cornerRadius="32dp"
+                app:strokeColor="#40FFFFFF"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_mic"
+                app:iconTint="@color/white"
+                app:iconSize="28dp"
+                app:iconPadding="0dp"
+                android:text="" />
+            <TextView android:id="@+id/tvMuteLabel" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Mute"
+                android:textColor="#B3FFFFFF" android:textSize="11sp" android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Speaker -->
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center" android:layout_weight="1">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSpeaker"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:cornerRadius="32dp"
+                app:strokeColor="#40FFFFFF"
+                app:icon="@drawable/ic_speaker_off"
+                app:iconTint="@color/white"
+                app:iconSize="28dp"
+                app:iconPadding="0dp"
+                android:text="" />
+            <TextView android:id="@+id/tvSpeakerLabel" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Speaker"
+                android:textColor="#B3FFFFFF" android:textSize="11sp" android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Hold -->
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center" android:layout_weight="1">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHold"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:cornerRadius="32dp"
+                app:strokeColor="#40FFFFFF"
+                app:icon="@drawable/ic_pause"
+                app:iconTint="@color/white"
+                app:iconSize="28dp"
+                app:iconPadding="0dp"
+                android:text="" />
+            <TextView android:id="@+id/tvHoldLabel" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Hold"
+                android:textColor="#B3FFFFFF" android:textSize="11sp" android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Transfer -->
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center" android:layout_weight="1">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTransfer"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:cornerRadius="32dp"
+                app:strokeColor="#40FFFFFF"
+                app:icon="@drawable/ic_call_transfer"
+                app:iconTint="@color/white"
+                app:iconSize="28dp"
+                app:iconPadding="0dp"
+                android:text="" />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Transfer"
+                android:textColor="#B3FFFFFF" android:textSize="11sp" android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Dialpad toggle -->
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center" android:layout_weight="1">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialpad"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                app:cornerRadius="32dp"
+                app:strokeColor="#40FFFFFF"
+                app:icon="@drawable/ic_dialpad"
+                app:iconTint="@color/white"
+                app:iconSize="28dp"
+                app:iconPadding="0dp"
+                android:text="" />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Keypad"
+                android:textColor="#B3FFFFFF" android:textSize="11sp" android:layout_marginTop="4dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Hang Up Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnHangUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/ic_call_decline"
+        app:backgroundTint="#F44336"
+        app:fabSize="normal"
+        app:tint="@color/white" />
+
+</LinearLayout>

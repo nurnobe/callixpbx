@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary brand colors -->
+    <color name="primary_color">#7867FF</color>
+    <color name="primary_dark">#5B4BE0</color>
+    <color name="primary_light">#B1AAFF</color>
+    <color name="primary_surface">#1A6C63FF</color>
+
+    <!-- Accent -->
+    <color name="accent_green">#10B981</color>
+    <color name="accent_red">#EF4444</color>
+    <color name="accent_orange">#F59E0B</color>
+    <color name="accent_blue">#3B82F6</color>
+
+    <!-- Background -->
+    <color name="background_dark">#10111D</color>
+    <color name="surface_dark">#191A2A</color>
+    <color name="surface_elevated">#20213A</color>
+    <color name="card_background">#20213A</color>
+
+    <!-- Text colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="white_40">#66FFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="text_secondary">#9CA3AF</color>
+
+    <!-- Status colors -->
+    <color name="status_online">#10B981</color>
+    <color name="status_offline">#6B7280</color>
+    <color name="status_busy">#EF4444</color>
+    <color name="error_color">#EF4444</color>
+
+    <!-- Bottom nav -->
+    <color name="bottom_nav_selected">#6C63FF</color>
+    <color name="bottom_nav_unselected">#6B7280</color>
+
+    <!-- Gradients start/end -->
+    <color name="gradient_start">#0F0F1A</color>
+    <color name="gradient_end">#1A1A3E</color>
+    <color name="call_gradient_start">#1A1A2E</color>
+    <color name="call_gradient_end">#0D0D1F</color>
+
+    <!-- Brand navy. Sampled from the supplied artwork itself (the median of the
+         tile's field, (1,31,91)) rather than eyeballed, and used as the adaptive
+         icon's background layer so the launcher's mask never reveals a seam
+         behind the handset. -->
+    <color name="ic_launcher_background">#011F5B</color>
+</resources>

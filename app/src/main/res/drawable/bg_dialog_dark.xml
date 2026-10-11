@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The window background for every alert dialog.
+
+  It exists so the dialog surface is a colour this app OWNS. The previous
+  behaviour came from AppCompat's default dialog background being resolved from
+  the phone's light/dark setting, which rendered a white dialog inside this
+  hard-dark app while the text colour stayed white, an empty-looking white box.
+
+  No padding is declared on purpose: the dialog's own layout supplies the inner
+  spacing (abc_alert_dialog_material applies ?attr/dialogPreferredPadding to its
+  content panel), so this drawable only decides the surface colour and the
+  corner radius. The 20dp radius matches CallixCard, so dialogs and cards read as
+  the same surface.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="@color/surface_elevated" />
+
+    <corners android:radius="20dp" />
+
+    <stroke
+        android:width="1dp"
+        android:color="@color/white_20" />
+
+</shape>

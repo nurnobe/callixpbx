@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        // Linphone SDK — সঠিক repository URL
+        maven { url 'https://download.linphone.org/maven_repository/' }
+    }
+}
+
+rootProject.name = "Callix PBX"
+include ':app'

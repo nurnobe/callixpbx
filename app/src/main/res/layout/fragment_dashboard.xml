@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="24dp">
+
+            <FrameLayout
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:background="@drawable/circle_avatar_bg">
+                <TextView
+                    android:id="@+id/tvUserInitial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="U"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="12dp">
+
+                <TextView
+                    android:id="@+id/tvDisplayName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Display Name"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif" />
+
+                <TextView
+                    android:id="@+id/tvExtension"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ext: 101"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log Out"
+                android:textColor="@color/accent_red"
+                app:icon="@drawable/ic_person"
+                app:iconTint="@color/accent_red" />
+        </LinearLayout>
+
+        <!-- SIP Status Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSipStatus"
+            style="@style/CallixCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="18dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/ivStatusDot"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/circle_avatar_bg"
+                    android:layout_marginEnd="10dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvSipStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Connecting..."
+                        android:textSize="15sp"
+                        android:textColor="@color/text_secondary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSipServer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="sip.callix.com.bd"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Active Call Banner -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardActiveCall"
+            style="@style/CallixCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#1A4CAF50">
+
+            <TextView
+                android:id="@+id/tvActiveCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text=""
+                android:textColor="#4CAF50"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Quick Actions -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quick Actions"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary"
+            android:textAllCaps="true"
+            android:letterSpacing="0.08"
+            android:paddingBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnQuickCall"
+                style="@style/CallixCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_call_answer"
+                        app:tint="@color/primary_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dialpad"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnQuickHistory"
+                style="@style/CallixCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_call_history"
+                        app:tint="@color/accent_orange" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Call History"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

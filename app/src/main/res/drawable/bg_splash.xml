@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash background.
+     Until now this was the gradient alone: there was no splash logo anywhere in
+     the app, and SplashActivity has no layout of its own, so nothing but a colour
+     was ever shown. The lockup is now a centred item over the same 135 degree
+     gradient, which suits any screen proportion: an item with gravity="center"
+     stays centred whether the screen is tall, short, wide or narrow, where a fixed
+     layout would drift off-centre on unusual aspect ratios.
+
+     splash_logo is the supplied lockup recoloured for this dark background
+     (white "Callix", brand orange "PBX", grey tagline); the tile keeps the
+     artwork's own colours. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#0F0F1A"
+                android:endColor="#1A1A3E"
+                android:angle="135" />
+        </shape>
+    </item>
+
+    <item
+        android:drawable="@drawable/splash_logo"
+        android:gravity="center" />
+
+</layer-list>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base App Theme.
+         Deliberately NOT a DayNight theme, and that is the fix for the white,
+         unreadable permission dialog.
+
+         A DayNight parent follows the PHONE's light/dark setting, but this app
+         colours only its own widgets: the palette is fixed dark (background_dark,
+         surface_dark, white text) and there is no values-night variant. So the
+         one thing DayNight still governed was everything the app does NOT paint
+         itself: most importantly alertDialogTheme. On a phone left in light
+         mode DayNight resolved the dialog from the LIGHT qualifier, i.e. a white
+         dialog window, while android:textColorPrimary below is white: the title
+         and message were white on white and the popup read as an empty white box
+         with only its buttons visible.
+
+         Pinning the non-DayNight dark parent removes the entire class of bug: no
+         resource in this app can now resolve light because of a system setting,
+         whatever the phone is set to. -->
+    <style name="Theme.CallixPBX" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent_green</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="android:windowBackground">@color/background_dark</item>
+        <item name="android:statusBarColor">@color/background_dark</item>
+        <item name="android:navigationBarColor">@color/surface_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+
+        <!-- Every dialog in the app (the permission prompts, the logout confirm,
+             the call-transfer prompt) is themed from here. Wiring all three
+             attributes matters because they are read by DIFFERENT builders:
+             AppCompat's AlertDialog reads alertDialogTheme, the framework's
+             android.app.AlertDialog (used for Call Transfer) reads
+             android:alertDialogTheme, and MaterialAlertDialogBuilder reads
+             materialAlertDialogTheme. Setting only one would leave a dialog
+             somewhere still resolving light. -->
+        <item name="alertDialogTheme">@style/Theme.CallixPBX.Dialog</item>
+        <item name="android:alertDialogTheme">@style/Theme.CallixPBX.Dialog</item>
+        <item name="materialAlertDialogTheme">@style/Theme.CallixPBX.Dialog</item>
+    </style>
+
+    <!-- Alert dialogs, forced dark.
+         Every colour here is an explicit literal rather than an inherited or
+         qualifier-resolved one: the surface, the title, the message, the hint of
+         the one EditText this app puts in a dialog, and the button labels. The
+         window background is replaced outright with a dark drawable, so even the
+         default AppCompat dialog background, a light 9-patch, cannot make the
+         dialog white. The dialog LAYOUT still supplies its own padding
+         (abc_alert_dialog_material reads ?attr/dialogPreferredPadding), so
+         swapping the background does not move the content. -->
+    <style name="Theme.CallixPBX.Dialog" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="colorSurface">@color/surface_elevated</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/primary_color</item>
+        <item name="android:colorAccent">@color/primary_color</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_secondary</item>
+        <item name="android:colorBackground">@color/surface_elevated</item>
+        <item name="android:windowBackground">@drawable/bg_dialog_dark</item>
+    </style>
+
+    <!-- Splash Theme -->
+    <style name="Theme.CallixPBX.Splash" parent="Theme.CallixPBX">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!-- Call Screen Theme (immersive) -->
+    <style name="Theme.CallixPBX.Call" parent="Theme.CallixPBX">
+        <item name="android:windowBackground">@color/call_gradient_start</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
+    <!-- Dialpad Button Style -->
+    <style name="DialpadButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_height">72dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="backgroundTint">#1AFFFFFF</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="rippleColor">#40FFFFFF</item>
+    </style>
+
+    <!-- In-call DTMF Button Style -->
+    <style name="DtmfButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="backgroundTint">#1AFFFFFF</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <!-- Card Style -->
+    <style name="CallixCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/card_background</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">3dp</item>
+        <item name="strokeColor">#26FFFFFF</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+</resources>

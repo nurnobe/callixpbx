@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Callix PBX</string>
+
+    <!-- Login -->
+    <string name="login_title">Log In</string>
+    <string name="login_subtitle">Sign in to your PBX account</string>
+    <string name="hint_api_url">API URL (https://app.callix.com.bd)</string>
+    <string name="hint_username">Extension / Username</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Sign In</string>
+    <string name="remember_me">Remember Me</string>
+
+    <!-- Navigation -->
+    <string name="nav_dashboard">Home</string>
+    <string name="nav_dialpad">Dialpad</string>
+    <string name="nav_calls">Calls</string>
+    <string name="nav_contacts">Contacts</string>
+    <!-- nav_location removed with the Location page. Reporting location is a
+         property of being signed in (LoginActivity starts LocationService
+         unconditionally); it is not a tab the user visits. -->
+
+    <!-- Dashboard -->
+    <string name="sip_status_registered">Online · Registered</string>
+    <string name="sip_status_registering">Connecting...</string>
+    <string name="sip_status_failed">Connection Failed</string>
+    <string name="sip_status_offline">Offline</string>
+
+    <!-- Call Screen -->
+    <string name="calling">Calling...</string>
+    <string name="ringing">Ringing...</string>
+    <string name="connected">Connected</string>
+    <string name="call_ended">Call Ended</string>
+    <string name="incoming_call">Incoming Call</string>
+    <string name="btn_answer">Answer</string>
+    <string name="btn_decline">Decline</string>
+    <string name="btn_hangup">End Call</string>
+    <string name="btn_mute">Mute</string>
+    <string name="btn_unmute">Unmute</string>
+    <string name="btn_speaker">Speaker</string>
+    <string name="btn_hold">Hold</string>
+    <string name="btn_resume">Resume</string>
+    <string name="btn_transfer">Transfer</string>
+
+    <!-- General -->
+    <string name="loading">Loading...</string>
+    <string name="no_data">No data available</string>
+    <string name="error_network">Network error</string>
+    <string name="logout">Logout</string>
+
+    <!-- Empty / failure states.
+         A failed request must say so. It must never be replaced by invented
+         contacts or invented call rows: both screens used to fall back to
+         hardcoded sample data when the call failed, which showed the user
+         names and durations that exist nowhere on the server. -->
+    <string name="contacts_empty">No contacts found</string>
+    <string name="contacts_load_failed">Couldn\'t load contacts. Pull down to retry.</string>
+    <string name="calls_empty">No call history available</string>
+    <string name="calls_load_failed">Couldn\'t load call history. Pull down to retry.</string>
+    <!-- Dialer identity line: shown when no extension could be resolved. -->
+    <string name="dialpad_no_extension">Not signed in</string>
+    <!-- Call history: a row with neither a name nor a number is not silent. -->
+    <string name="calls_unknown_number">Unknown number</string>
+    <!-- Call history actions. Tapping a row sends its number to the dialer (the
+         user reviews it and presses call); a long press copies it. -->
+    <string name="calls_number_copied">Number copied</string>
+    <string name="calls_tap_to_dial">Opening dialer…</string>
+    <string name="calls_no_number_to_copy">This call has no number</string>
+    <!-- Recording playback. The server marks which rows have a recording the
+         caller is allowed to hear, so the control is only offered when it works. -->
+    <string name="calls_play_recording">Play recording</string>
+    <string name="calls_stop_recording">Stop playback</string>
+    <string name="calls_recording_failed">Couldn\'t play this recording</string>
+
+    <!-- Contacts: the phone's own address book, merged with the PBX directory. -->
+    <string name="contacts_phone_permission">Show phone contacts</string>
+    <string name="contacts_phone_permission_hint">Tap to allow access to the contacts saved on this phone.</string>
+    <string name="contacts_phone_denied">Phone contacts are hidden — permission was denied. Tap to ask again, or enable it in system Settings.</string>
+    <string name="contacts_source_phone">Phone contact</string>
+    <string name="contacts_source_pbx">PBX extension</string>
+    <string name="contacts_load_failed_permission">Couldn\'t read this phone\'s contacts.</string>
+
+    <!-- Placing a call needs a registered extension. Shared by every screen that
+         can start one (the dialer and the contacts list) so the wording cannot
+         drift apart between them. -->
+    <string name="call_needs_registration_failed">PBX registration failed. Go to Home and tap the status card to retry.</string>
+    <string name="call_needs_registration_pending">PBX is connecting. Please wait a moment.</string>
+
+    <!-- Missed calls. A missed call is only ever raised from a call that really
+         rang this device and was never answered: a call the user deliberately
+         declined is not a miss, and an outbound call can never be missed. -->
+    <string name="missed_call_channel_name">Missed calls</string>
+    <string name="missed_call_channel_desc">Alerts for calls you did not answer</string>
+    <string name="missed_call_title">Missed call from %1$s</string>
+    <string name="missed_call_title_many">%1$d missed calls</string>
+    <string name="missed_call_title_unknown">Missed call from an unknown number</string>
+    <string name="missed_call_open_history">Tap to see your call history</string>
+
+    <!-- Shown on the incoming/active call screen when the network gave us neither
+         a caller name nor a dialable number. It states the absence plainly rather
+         than filling the space with a SIP address or an internal account id. -->
+    <string name="incoming_unknown_caller">Unknown number</string>
+
+    <!-- A caller who is another extension on this PBX. An extension is an address
+         on this phone system, not a truncated phone number, so it is LABELLED
+         rather than shown as a bare "101" that reads like a broken number. The
+         extension number is always shown, and the name beside it whenever the
+         network or the directory knows it. -->
+    <string name="extension_number">Ext %1$s</string>
+
+    <!-- The incoming-call screen is answered by sliding, so the labels say what the
+         gesture does. The buttons remain tappable: a swipe must never be the only
+         way to answer a call. -->
+    <string name="call_answer">Answer</string>
+    <string name="call_decline">Decline</string>
+    <string name="call_incoming_label">Incoming Call</string>
+    <string name="call_slide_to_answer">Slide to answer</string>
+    <string name="call_slide_to_decline">Slide to decline</string>
+
+    <!-- Always-on permissions. The app explains WHY it needs each one, because a
+         permission asked for without a reason is a permission the user denies. -->
+    <string name="permission_full_screen_title">Show incoming calls on screen</string>
+    <string name="permission_full_screen_body">Android needs one extra permission before an incoming call can take over the screen while the app is in the background. Without it, calls appear only as a small banner.</string>
+    <string name="permission_battery_title">Keep the app running in the background</string>
+    <string name="permission_battery_body">Android may freeze the app in the background to save battery, which stops incoming calls from arriving. Allow Callix PBX to run without this restriction so calls always come through.</string>
+    <string name="permission_open_settings">Open settings</string>
+    <string name="permission_allow">Allow</string>
+    <string name="permission_later">Not now</string>
+
+    <!-- Settings screen. These two grants decide whether a call can take the screen
+         and whether the service survives the night, so their state has to stay
+         visible and re-reachable after the first-run prompts have been dismissed. -->
+    <string name="settings_alerts_title">Call Alerts &amp; Background</string>
+    <string name="settings_full_screen_label">Full-screen incoming calls</string>
+    <string name="settings_battery_label">Keep running in the background</string>
+    <string name="settings_status_on">Allowed</string>
+    <string name="settings_status_off">Not allowed — tap to fix</string>
+    <string name="settings_status_unavailable">Not available on this device</string>
+
+    <!-- Login footer. Bound to BuildConfig.VERSION_NAME at runtime so the screen
+         can never advertise a version the build did not produce. -->
+    <string name="login_version_format">V %1$s Callix Technologies</string>
+</resources>
