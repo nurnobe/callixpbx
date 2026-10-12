@@ -23,7 +23,10 @@ import java.io.File
  * per device/source when Android requires it.
  */
 object GithubUpdateManager {
-    private const val RELEASE_URL = "https://api.github.com/repos/nurnobe/callixpbx/releases/latest"
+    // App source lives in the private Callix PBX repository. Public APKs are
+    // deliberately served from this download-only repository so users can update
+    // without being given access to the source project.
+    private const val RELEASE_URL = "https://api.github.com/repos/nurnobe/callixpbx-downloads/releases/latest"
     private val client = OkHttpClient()
 
     data class Release(val versionName: String, val versionCode: Int, val apkUrl: String)

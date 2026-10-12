@@ -28,8 +28,8 @@ android {
         // 14 / 1.3 -- the display-name fix (the dialer, call log and call screen
         // must show the EXTENSION's own name, not the tenant account's) plus the
         // battery-exemption flow that 1.2 shipped without.
-        versionCode 100
-        versionName "1.00"
+        versionCode 101
+        versionName "1.01"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
